@@ -5,6 +5,8 @@
 package lab4p2_salvador_macias;
 
 import java.util.ArrayList;
+import static lab4p2_salvador_macias.Lab4p2_salvador_macias.lista_inquilinos;
+import static lab4p2_salvador_macias.Lab4p2_salvador_macias.lista_limpiadores;
 
 /**
  *
@@ -34,11 +36,34 @@ public class Casero extends Persona {
         this.nombre = nombre;
     }
 
-    public static void desalojar() {
+    public static void desalojar(Edificio edificio_default) {
+        if (Lab4p2_salvador_macias.lista_apartamentos.isEmpty()) {
+          //  System.out.println("no hay inquilinos a desalojar ");
+        } else {
+            for (int i = 0; i < lista_inquilinos.size(); i++) {
+                System.out.println(
+                        lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
+                        + lista_inquilinos.get(i)
+                );
+            }
 
+        }
+        
     }
 
-    public static void despedir() {
+    public static void despedir(Edificio edificio_default) {
+        if (lista_limpiadores.isEmpty()) {
+            //System.out.println("no hay limpiadores para despedir");
+
+        } else {
+            for (int i = 0; i < lista_limpiadores.size(); i++) {
+                System.out.println(
+                        lista_limpiadores.indexOf(lista_limpiadores.get(i)) + "-"
+                        + lista_limpiadores.get(i)
+                );
+            }
+
+        }
 
     }
 

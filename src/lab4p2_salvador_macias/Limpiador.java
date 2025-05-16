@@ -5,6 +5,8 @@
 package lab4p2_salvador_macias;
 
 import java.util.ArrayList;
+import static lab4p2_salvador_macias.Lab4p2_salvador_macias.lista_apartamentos;
+import static lab4p2_salvador_macias.Lab4p2_salvador_macias.lista_inquilinos;
 
 /**
  *
@@ -52,13 +54,36 @@ public class Limpiador extends Persona {
         this.nombre = nombre;
     }
 
-    public static void ofrecerLimpieza() {
+    public static void ofrecerLimpieza(Edificio edificio_default) {
+        if (lista_inquilinos.isEmpty()) {
+            System.out.println("no hay inquilinos disponibles para ofrecer limpieza");
+        } else {
+            for (int i = 0; i < lista_inquilinos.size(); i++) {
+                System.out.println(
+                        lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
+                        + lista_inquilinos.get(i)
+                );
+            }
+
+        }
 
     }
 
-    public static void LimpiarApartamento() {
+    public static void LimpiarApartamento(Edificio edificio_default) {
+        if (lista_apartamentos.isEmpty()) {
+            System.out.println("no hay apartamentos o inquilinos para realizar limpieza");
+        } else {
+            for (int i = 0; i < lista_inquilinos.size(); i++) {
+                System.out.println(
+                        lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
+                        + lista_inquilinos.get(i)
+                );
+            }
+
+        }
 
     }
+    
 
     @Override
     public String toString() {

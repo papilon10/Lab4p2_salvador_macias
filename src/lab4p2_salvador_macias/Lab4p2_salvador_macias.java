@@ -58,21 +58,22 @@ public class Lab4p2_salvador_macias {
                 System.out.println("ingrese el nombre del inquilino : ");
                 String nombre = str.nextLine();
 
-                if (lista_apartamentos.isEmpty()) {
-                    System.out.println("no hay apartamentos para designarle al inquilino");
-                } else {
-                    for (int i = 0; i < lista_apartamentos.size(); i++) {
-                        System.out.println(
-                                lista_apartamentos.indexOf(lista_apartamentos.get(i)) + "-"
-                                + lista_apartamentos.get(i)
-                        );
-                    }
-                    System.out.println("seleccion el apartamento a asignar : ");
-                    int apartamento_seleccionado = lea.nextInt();
-                    Apartamento seleccionado = lista_apartamentos.get(apartamento_seleccionado);
-                    lista_inquilinos.add(new Inquilino(seleccionado, nombre));
-
-                }
+//                if (lista_apartamentos.isEmpty()) {
+//                    System.out.println("no hay apartamentos para designarle al inquilino");
+//                } else {
+//                    for (int i = 0; i < lista_apartamentos.size(); i++) {
+//                        System.out.println(
+//                                lista_apartamentos.indexOf(lista_apartamentos.get(i)) + "-"
+//                                + lista_apartamentos.get(i)
+//                        );
+//                    }
+//                    System.out.println("seleccion el apartamento a asignar : ");
+//                    int apartamento_seleccionado = lea.nextInt();
+//                    Apartamento seleccionado = lista_apartamentos.get(apartamento_seleccionado);
+//                    lista_inquilinos.add(new Inquilino(seleccionado, nombre));
+//
+//                }
+                lista_inquilinos.add(new Inquilino(nombre));
 
             } else if (opc == 5) {
                 System.out.println("Ingrese el nombre del limpiador: ");
@@ -84,7 +85,7 @@ public class Lab4p2_salvador_macias {
 
                 } else {
                     System.out.println("ingrese el indice del inquilino a asignar");
-                    /*   do {
+                    do {
                         for (int i = 0; i < lista_inquilinos.size(); i++) {
                             System.out.println(
                                     lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
@@ -98,9 +99,8 @@ public class Lab4p2_salvador_macias {
                         if (opc_agg_inq == 0) {
                             salida_agg = true;
                         }
-                        
 
-                    } while (salida_agg != true);*/
+                    } while (salida_agg != true);
                     lista_limpiadores.add(new Limpiador(nombre));
 
                 }
@@ -130,10 +130,34 @@ public class Lab4p2_salvador_macias {
             switch (opc_casero) {
                 case 1: {
 
+                    Casero.desalojar(edificio_default);
+                    for (int i = 0; i < lista_apartamentos.size(); i++) {
+                        if (lista_apartamentos.get(i).getLista_inquilinos().isEmpty()) {
+                            System.out.println("no hay inquilinos para desalojar");
+                        } else {
+                            System.out.println("ingrese el indice del departamento que desalojara: ");
+                            int desalojado_depa = lea.nextInt();
+                            lista_apartamentos.get(i).setLista_inquilinos(null);
+                            System.out.println("el departamento fue desalojado");
+
+                        }
+                    }
+
                 }
 
                 break;
                 case 2: {
+                    Casero.despedir(edificio_default);
+                    if (lista_limpiadores.isEmpty()) {
+                        System.out.println("no hay limpiadores para despedir");
+                    } else {
+                        System.out.println("ingrese el indice del limpiador a despedir: ");
+                        int indice_despedido = lea.nextInt();
+                        lista_limpiadores.remove(indice_despedido);
+                        System.out.println("se despedio al limpiador");
+
+                    }
+
                 }
 
                 break;
@@ -158,7 +182,11 @@ public class Lab4p2_salvador_macias {
 
     public static void menu_inquilino() {
         boolean salida_inquilino = false;
-        do {
+
+        if (lista_inquilinos.isEmpty()) {
+            System.out.println("cree inquilino para seleccionar ");
+        } else {
+
             for (int i = 0; i < lista_inquilinos.size(); i++) {
                 System.out.println(
                         lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
@@ -168,62 +196,68 @@ public class Lab4p2_salvador_macias {
             System.out.println("seleccione inquilino: ");
             int inquilino_seleccionado = lea.nextInt();
             lista_inquilinos.get(inquilino_seleccionado);
-            System.out.println("---menu inquilino---");
-            System.out.println("1. firmar contraro");
-            System.out.println("2. cortar contrato ");
-            System.out.println("3. solicitar limpieza ");
-            System.out.println("4. aceptar limpieza");
-            System.out.println("5.salir");
+            do {
+                System.out.println("---menu inquilino---");
+                System.out.println("1. firmar contrato");
+                System.out.println("2. cortar contrato ");
+                System.out.println("3. solicitar limpieza ");
+                System.out.println("4. aceptar limpieza");
+                System.out.println("5.salir");
 
-            System.out.println("seleccione una opcion: ");
-            int opc_inquilino = lea.nextInt();
-            switch (opc_inquilino) {
-                case 1: {
-                    Inquilino.firmarContrato(edificio_default,lista_inquilinos.get(inquilino_seleccionado));
-                    System.out.println("Ingrese el indice del edificio que desea alquilar: ");
-                    int depa_alquilado = lea.nextInt();
-                    Apartamento depa_alqui = lista_apartamentos.get(depa_alquilado);
-                    lista_inquilinos.get(inquilino_seleccionado).setApartamento(depa_alqui);
+                System.out.println("seleccione una opcion: ");
+                int opc_inquilino = lea.nextInt();
+                switch (opc_inquilino) {
+                    case 1: {
+                        Inquilino.firmarContrato(edificio_default, lista_inquilinos.get(inquilino_seleccionado));
+                        System.out.println("Ingrese el indice del edificio que desea alquilar: ");
+                        int depa_alquilado = lea.nextInt();
+                        Apartamento depa_alqui = lista_apartamentos.get(depa_alquilado);
+                        lista_inquilinos.get(inquilino_seleccionado).setApartamento(depa_alqui);
 
+                    }
+
+                    break;
+                    case 2: {
+                        Inquilino.cortarContrato(edificio_default, lista_inquilinos.get(inquilino_seleccionado));
+                        System.out.println("se le ha rescendido el contrato del departamento al inquilino ");
+
+                    }
+                    break;
+
+                    case 3: {
+                        Inquilino.solicitarLimpieza(edificio_default);
+                        System.out.println("Ingrese el indice del limpiador a la que se le desea hacer la solitud: ");
+                        int limpiador_sele = lea.nextInt();
+                        Limpiador selected = lista_limpiadores.get(limpiador_sele);
+
+                    }
+
+                    break;
+                    case 4: {
+                    }
+
+                    break;
+
+                    case 5: {
+                        System.out.println("volviendo al menu principal");
+                        salida_inquilino = true;
+                    }
+
+                    break;
+
+                    default:
+                        System.out.println("opcion ingresada es invalida");
                 }
 
-                break;
-                case 2: {
-                    Inquilino.cortarContrato(edificio_default, lista_inquilinos.get(inquilino_seleccionado));
-                    System.out.println("se le ha rescendido el contrato del departamento al inquilino ");
-
-                }
-                break;
-
-                case 3: {
-                    
-                    
-                }
-
-                break;
-                case 4: {
-                }
-
-                break;
-
-                case 5: {
-                    System.out.println("volviendo al menu principal");
-                    salida_inquilino = true;
-                }
-
-                break;
-
-                default:
-                    System.out.println("opcion ingresada es invalida");
-            }
-
-        } while (salida_inquilino != true);
-
+            } while (salida_inquilino != true);
+        }
     }//fin menu inquilino
 
     public static void menu_limpiador() {
         boolean salida_limpiador = false;
-        do {
+        if (lista_limpiadores.isEmpty()) {
+            System.out.println("cree limpiador para seleccionar");
+        } else {
             for (int i = 0; i < lista_limpiadores.size(); i++) {
                 System.out.println(
                         lista_limpiadores.indexOf(lista_limpiadores.get(i)) + "-"
@@ -233,39 +267,42 @@ public class Lab4p2_salvador_macias {
             System.out.println("seleccione limpiador: ");
             int limpiador_seleccionado = lea.nextInt();
             lista_inquilinos.get(limpiador_seleccionado);
-            System.out.println("---menu limpiador---");
-            System.out.println("1. ofrecer limpieza");
-            System.out.println("2. limpiar  apartamentos ");
-            System.out.println("3.salir");
 
-            System.out.println("seleccione una opcion: ");
-            int opc_limpiador = lea.nextInt();
-            switch (opc_limpiador) {
-                case 1: {
+            do {
+
+                System.out.println("---menu limpiador---");
+                System.out.println("1. ofrecer limpieza");
+                System.out.println("2. limpiar  apartamentos ");
+                System.out.println("3.salir");
+
+                System.out.println("seleccione una opcion: ");
+                int opc_limpiador = lea.nextInt();
+                switch (opc_limpiador) {
+                    case 1: {
+                        Limpiador.ofrecerLimpieza(edificio_default);
+                    }
+
+                    break;
+                    case 2: {
+
+                    }
+                    break;
+
+                    case 3: {
+                        salida_limpiador = true;
+                        System.out.println("volviendo al menu principal");
+                    }
+
+                    break;
+
+                    default: {
+                        System.out.println("opcion ingresada es invalida");
+
+                    }
 
                 }
-
-                break;
-                case 2: {
-
-                }
-                break;
-
-                case 3: {
-                    salida_limpiador = true;
-                    System.out.println("volviendo al menu principal");
-                }
-
-                break;
-
-                default: {
-                    System.out.println("opcion ingresada es invalida");
-
-                }
-
-            }
-        } while (salida_limpiador != true);
-
+            } while (salida_limpiador != true);
+        }//fin else
     }//fin menu limpiador
 
 }//fin clase

@@ -171,7 +171,7 @@ public class Lab4p2_salvador_macias {
             System.out.println("---menu inquilino---");
             System.out.println("1. firmar contraro");
             System.out.println("2. cortar contrato ");
-            System.out.println("3. solitar limpieza ");
+            System.out.println("3. solicitar limpieza ");
             System.out.println("4. aceptar limpieza");
             System.out.println("5.salir");
 

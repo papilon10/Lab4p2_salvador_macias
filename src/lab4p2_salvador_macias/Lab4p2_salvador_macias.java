@@ -20,6 +20,7 @@ public class Lab4p2_salvador_macias {
     public static Scanner str = new Scanner(System.in);
     public static ArrayList<Inquilino> lista_inquilinos = new ArrayList();
     public static ArrayList<Limpiador> lista_limpiadores = new ArrayList();
+    public static ArrayList<Apartamento> lista_apartamentos = new ArrayList();
 
     public static Edificio edificio_default = new Edificio("Juan");
 
@@ -45,7 +46,56 @@ public class Lab4p2_salvador_macias {
             } else if (opc == 3) {
                 menu_limpiador();
             } else if (opc == 4) {
+                System.out.println("ingrese el nombre del inquilino : ");
+                String nombre = str.nextLine();
+
+                if (lista_apartamentos.isEmpty()) {
+                    System.out.println("no hay apartamentos para designarle al inquilino");
+                } else {
+                    for (int i = 0; i < lista_apartamentos.size(); i++) {
+                        System.out.println(
+                                lista_apartamentos.indexOf(lista_apartamentos.get(i)) + "-"
+                                + lista_apartamentos.get(i)
+                        );
+                    }
+                    System.out.println("seleccion el apartamento a asignar : ");
+                    int apartamento_seleccionado = lea.nextInt();
+                    Apartamento seleccionado = lista_apartamentos.get(apartamento_seleccionado);
+                    lista_inquilinos.add(new Inquilino(seleccionado, nombre));
+
+                }
+
             } else if (opc == 5) {
+                System.out.println("Ingrese el nombre del limpiador: ");
+                String nombre = str.nextLine();
+                boolean salida_agg = false;
+
+                if (lista_inquilinos.isEmpty()) {
+                    System.out.println("no hay inquilinos para asignar al limpiador ");
+
+                } else {
+                    System.out.println("ingrese el indice del inquilino a asignar");
+                 /*   do {
+                        for (int i = 0; i < lista_inquilinos.size(); i++) {
+                            System.out.println(
+                                    lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
+                                    + lista_inquilinos.get(i)
+                            );
+                        }
+                        System.out.println("desea ingresar otro inquilino :"
+                                + "\n1.si"
+                                + "+\n0.no ");
+                        int opc_agg_inq = lea.nextInt();
+                        if (opc_agg_inq == 0) {
+                            salida_agg = true;
+                        }
+                        
+
+                    } while (salida_agg != true);*/
+                    lista_limpiadores.add(new Limpiador(nombre));
+
+                }
+
             } else if (opc == 6) {
                 System.out.println("se abandonara el programa");
                 salida = true;

@@ -26,6 +26,15 @@ public class Lab4p2_salvador_macias {
 
     public static void main(String[] args) {
 
+        edificio_default.setLista_apartamentos(lista_apartamentos);
+        edificio_default.setLista_limpiadores(lista_limpiadores);
+        edificio_default.setLista_apartamentos(lista_apartamentos);
+
+        lista_apartamentos.add(new Apartamento(200, 0));
+        lista_apartamentos.add(new Apartamento(250, 0));
+        lista_apartamentos.add(new Apartamento(500, 0));
+        lista_apartamentos.add(new Apartamento(1000, 0));
+
         // TODO code application logic here
         boolean salida = false;
         do {
@@ -75,7 +84,7 @@ public class Lab4p2_salvador_macias {
 
                 } else {
                     System.out.println("ingrese el indice del inquilino a asignar");
-                 /*   do {
+                    /*   do {
                         for (int i = 0; i < lista_inquilinos.size(); i++) {
                             System.out.println(
                                     lista_inquilinos.indexOf(lista_inquilinos.get(i)) + "-"
@@ -170,17 +179,25 @@ public class Lab4p2_salvador_macias {
             int opc_inquilino = lea.nextInt();
             switch (opc_inquilino) {
                 case 1: {
-                    menu_casero();
+                    Inquilino.firmarContrato(edificio_default,lista_inquilinos.get(inquilino_seleccionado));
+                    System.out.println("Ingrese el indice del edificio que desea alquilar: ");
+                    int depa_alquilado = lea.nextInt();
+                    Apartamento depa_alqui = lista_apartamentos.get(depa_alquilado);
+                    lista_inquilinos.get(inquilino_seleccionado).setApartamento(depa_alqui);
 
                 }
 
                 break;
                 case 2: {
+                    Inquilino.cortarContrato(edificio_default, lista_inquilinos.get(inquilino_seleccionado));
+                    System.out.println("se le ha rescendido el contrato del departamento al inquilino ");
 
                 }
                 break;
 
                 case 3: {
+                    
+                    
                 }
 
                 break;
